@@ -7,9 +7,9 @@ services:
       - express
     restart: unless-stopped
     environment:
-      - EXPRESS_HOST_1=tfd-b5-backend-express-1
-      - EXPRESS_HOST_2=tfd-b5-backend-express-2
-      - EXPRESS_HOST_3=tfd-b5-backend-express-3
+      - EXPRESS_HOST_1=tfd-b5-backend-prod-express-1
+      - EXPRESS_HOST_2=tfd-b5-backend-prod-express-2
+      - EXPRESS_HOST_3=tfd-b5-backend-prod-express-3
       - EXPRESS_PORT=3000
       - NGINX_SERVER_NAME=localhost
       - NGINX_MAX_BODY=100M
@@ -22,6 +22,8 @@ services:
     depends_on:
       - database
     restart: unless-stopped
+    environment:
+      - NODE_ENV=prod
     scale: 3
   database:
     image: mongo:8.2.7-noble
