@@ -27,7 +27,7 @@ services:
       - proxy-net
   database:
     image: mongo:8.2.7-noble
-    container_name: devops-database
+    container_name: devops-database-prod
     restart: unless-stopped
     ports:
       - 27017:27017
