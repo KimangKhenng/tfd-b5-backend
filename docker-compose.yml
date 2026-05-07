@@ -11,8 +11,8 @@ services:
       - EXPRESS_PORT=3000
       - NGINX_SERVER_NAME=localhost
       - NGINX_MAX_BODY=100M
-    ports:
-      - 3000:3000
+    networks:
+      - proxy-net
   express:
     build:
       context: .
@@ -23,6 +23,8 @@ services:
       - ./src:/app/src
       - .env:/app/.env
     scale: 2
+    networks:
+      - proxy-net
   database:
     image: mongo:8.2.7-noble
     container_name: devops-database
@@ -30,5 +32,10 @@ services:
       - 27017:27017
     volumes:
       - devops-database-data:/data/db
+    networks:
+      - proxy-net
 volumes:
   devops-database-data:
+networks:
+  proxy-net:
+    driver: bridge
