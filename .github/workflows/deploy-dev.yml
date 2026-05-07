@@ -19,7 +19,8 @@ jobs:
                   key: ${{ secrets.SSH_PRIVATE_KEY }}
                   port: ${{ secrets.SSH_PORT }}
                   script: |
-                      cd /tfd-b5-backend
+                      pwd
+                      cd tfd-b5-backend
                       git pull origin develop
                       docker compose -f docker-compose.yml --env-file .env.dev -p tfd-b5-backend-dev build --no-cache
                       docker compose -f docker-compose.yml --env-file .env.dev -p tfd-b5-backend-dev up -d --remove-orphans
