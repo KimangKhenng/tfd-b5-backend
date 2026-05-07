@@ -38,4 +38,4 @@ volumes:
   devops-database-data:
 networks:
   proxy-net:
-    driver: bridge
+    external: true 
