@@ -21,7 +21,7 @@ services:
       - database
     volumes:
       - ./src:/app/src
-      - .env:/app/.env
+      - .env.dev:/app/.env.dev
     scale: 2
     networks:
       - proxy-net
