@@ -37,6 +37,7 @@ app.use(cookieParser());
 app.get('/health', (req, res) => {
     console.log("Hello")
     res.status(200).json({
+        message: `Server is healthy from ${process.env.NODE_ENV} environment`,
         status: 'healthy',
         timestamp: new Date().toISOString(),
         uptime: process.uptime()
