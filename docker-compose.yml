@@ -2,7 +2,7 @@ services:
   load-balancer:
     build:
       context: .
-      dockerfile: Dockerfile-nginx
+      dockerfile: Dockerfile-nginx-dev
     depends_on:
       - express
     environment:
