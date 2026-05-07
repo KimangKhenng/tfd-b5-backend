@@ -21,7 +21,11 @@ jobs:
                   script: |
                       pwd
                       cd tfd-b5-backend
-                      git pull origin develop
+                      git reset --hard HEAD
+                      git fetch origin develop
+                      git checkout develop
+                      git reset --hard origin/develop
+                      git clean -fd
                       docker compose -f docker-compose.yml --env-file .env.dev -p tfd-b5-backend-dev build --no-cache
                       docker compose -f docker-compose.yml --env-file .env.dev -p tfd-b5-backend-dev up -d --remove-orphans
                       docker image prune -f
