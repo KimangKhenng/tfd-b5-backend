@@ -14,7 +14,7 @@ services:
     networks:
       - proxy-net
   express:
-    image: kimang/tfd-b5-backend:${IMAGE_TAG:-latest}
+    image: kimang/tfd-b5-backend:latest
     depends_on:
       - database
     environment:
