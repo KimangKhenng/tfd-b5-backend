@@ -19,6 +19,8 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - database
+    environment:
+      - NODE_ENV=dev
     volumes:
       - .env.dev:/app/.env.dev
     scale: 2
@@ -28,7 +30,7 @@ services:
     image: mongo:8.2.7-noble
     container_name: devops-database-dev
     ports:
-      - 27017:27017
+      - 27018:27017
     volumes:
       - devops-database-data:/data/db
     networks:

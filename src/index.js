@@ -8,6 +8,7 @@ import cors from 'cors'
 // import hpp from 'hpp';
 import bodyParser from 'body-parser';
 // Determine which .env file to load
+console.log(`Current NODE_ENV: ${process.env.NODE_ENV}`);
 const envFile = `.env.${process.env.NODE_ENV || 'dev'}`;
 const envPath = path.resolve(process.cwd(), envFile);
 
