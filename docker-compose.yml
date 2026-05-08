@@ -14,9 +14,7 @@ services:
     networks:
       - proxy-net
   express:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: kimang/tfd-b5-backend:${IMAGE_TAG:-latest}
     depends_on:
       - database
     environment:
