@@ -45,6 +45,11 @@ jobs:
                   port: ${{ secrets.SSH_PORT }}
                   script: |
                       cd tfd-b5-backend
+                      git reset --hard HEAD
+                      git fetch origin master
+                      git checkout master
+                      git reset --hard origin/master
+                      git clean -fd
                       docker compose -f docker-compose.prod.yml --env-file .env.prod -p tfd-b5-backend-prod pull
                       docker compose -f docker-compose.prod.yml --env-file .env.prod -p tfd-b5-backend-prod up -d --remove-orphans
                       docker image prune -f
