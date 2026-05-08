@@ -23,6 +23,7 @@ import express from 'express';
 import router from './routes/index.js';
 const app = express();
 import connectDB from './config/database.js';
+import { version } from 'os';
 
 connectDB()
 app.use(helmet());
@@ -38,6 +39,8 @@ app.use(cookieParser());
 app.get('/health', (req, res) => {
     console.log("Hello")
     res.status(200).json({
+        message: `Server is healthy from ${process.env.NODE_ENV} environment`,
+        version: '1.0.3',
         status: 'healthy',
         timestamp: new Date().toISOString(),
         uptime: process.uptime()

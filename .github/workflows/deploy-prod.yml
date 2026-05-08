@@ -1,0 +1,31 @@
+# .github/workflows/deploy.yml
+name: Deploy on master branch
+
+on:
+    push:
+        branches:
+            - master # Only deploy from master branch
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Deploy to VPS via SSH
+              uses: appleboy/ssh-action@v1
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USER }}
+                  key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  port: ${{ secrets.SSH_PORT }}
+                  script: |
+                      pwd
+                      cd tfd-b5-backend
+                      git reset --hard HEAD
+                      git fetch origin master
+                      git checkout master
+                      git reset --hard origin/master
+                      git clean -fd
+                      docker compose -f docker-compose.prod.yml --env-file .env.prod -p tfd-b5-backend-prod build --no-cache
+                      docker compose -f docker-compose.prod.yml --env-file .env.prod -p tfd-b5-backend-prod up -d --remove-orphans
+                      docker image prune -f
